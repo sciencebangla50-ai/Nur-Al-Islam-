@@ -7,15 +7,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root { 
-            --p: #1b4d3e; 
-            --s: #2e7d32; 
-            --gold: #b8860b; 
-            --gold-light: #d4af37;
-            --bg: #f4f7f6; 
-            --white: #ffffff;
-            --shadow: 0 10px 30px rgba(0,0,0,0.08);
-        }
+       :root { 
+    --p: #1b4d3e; 
+    --s: #2e7d32; 
+    --gold: #b8860b; 
+    --gold-light: #d4af37;
+    /* এখানে পরিবর্তন করা হয়েছে: একদম সাদার বদলে হালকা আরামদায়ক রঙ */
+    --bg: #f0f4f2; 
+    --white: #fafcfb; 
+    --shadow: 0 10px 30px rgba(27, 77, 62, 0.05);
+}
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; }
         body { font-family: 'Hind Siliguri', sans-serif; background: var(--bg); margin: 0; padding: 0; overflow-x: hidden; }
@@ -104,6 +105,121 @@
         .c-2 { background: linear-gradient(135deg, #11998e, #38ef7d); }
         .c-3 { background: linear-gradient(135deg, #2193b0, #6dd5ed); }
         .c-4 { background: linear-gradient(135deg, #ee0979, #ff6a00); }
+                .page, .ayah-card, .bn {
+            background: var(--white) !important;
+        }
+
+        .grid-btn, .p-card, .date-container {
+            background: var(--white) !important;
+        }
+
+        body {
+            color: #2c3e50;
+        }
+.forecast-day {
+    min-width: 80px;
+    background: #f9f9f9;
+    padding: 12px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+}
+.forecast-day b { display: block; margin-bottom: 5px; font-size: 0.85rem; }
+.forecast-day i { font-size: 1.5rem; margin: 8px 0; display: block; }
+.forecast-day span { font-size: 0.75rem; color: #2e7d32; font-weight: 700; }
+#forecast-list::-webkit-scrollbar { display: none; }
+.hadith-card-premium {
+    background: linear-gradient(135deg, #1e5e5e 0%, #0f3d3d 100%);
+    color: #e0f2f1;
+    border-radius: 20px;
+    padding: 20px;
+    margin: 10px auto 25px auto; /* দুই পাশে সমান গ্যাপ রাখবে */
+    width: calc(100% - 30px); /* স্ক্রিনের সাইজ অনুযায়ী ছোট হবে */
+    box-sizing: border-box; /* প্যাডিং যেন কার্ড বড় না করে */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.hadith-text-style {
+    font-size: 1rem; /* মোবাইলের জন্য পারফেক্ট সাইজ */
+    line-height: 1.6;
+    color: #ffffff;
+    margin: 0;
+}
+/* হাইলাইট গ্রিডকে সুন্দর করার জন্য */
+.highlights-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* ২ কলামে সাজালে মোবাইলে ভালো দেখাবে */
+    gap: 15px;
+    margin-top: 20px;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 15px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    text-align: left; /* বাম দিকে এলাইনমেন্ট */
+}
+
+.highlight-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.highlight-item i {
+    font-size: 1.5rem;
+    color: #ffd700;
+}
+
+.highlight-item b {
+    font-size: 1.1rem;
+    color: #fff;
+    display: block;
+}
+.weather-card-premium {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    color: white !important;
+    border-radius: 25px;
+    padding: 22px;
+    margin: 20px auto;
+    width: calc(100% - 30px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+    box-sizing: border-box;
+}
+
+.highlights-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 15px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+}
+
+.highlight-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.highlight-item i {
+    font-size: 1.4rem;
+    color: #ffd700 !important;
+}
+
+.highlight-item div span {
+    display: block;
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.9);
+}
+
+.highlight-item div b {
+    font-size: 1.1rem;
+    color: white !important;
+    font-weight: bold;
+}
+
     </style>
    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignal.js" async=""></script>
 <script>
@@ -168,6 +284,21 @@
         <div class="grid-btn" onclick="openPage('zakat-page')"><i class="fas fa-calculator"></i><b>যাকাত</b></div>
         <div class="grid-btn" onclick="window.open('https://www.google.com/maps/search/mosque+near+me')"><i class="fas fa-mosque"></i><b>মসজিদ</b></div>
     </div>
+<div class="hadith-card-premium" id="hadith-card">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+        <span style="color: #4db6ac; font-weight: bold; letter-spacing: 1px;">
+            <i class="fas fa-quran"></i> আজকের বাণী
+        </span>
+        <i class="fas fa-sync-alt" onclick="getRandomHadith()" style="cursor: pointer; color: #4db6ac;"></i>
+    </div>
+    <p id="hadith-text" class="hadith-text-style">হাদিস লোড হচ্ছে...</p>
+    <div id="hadith-ref" style="text-align: right; font-size: 0.85rem; color: #80cbc4; margin-top: 10px; font-weight: 500;">
+        — লোড হচ্ছে
+    </div>
+</div>
+
+    </div>
+</div>
 
     <div class="p-card">
         <h3 style="margin-top:0; color:var(--p); border-bottom:2px solid #eee; padding-bottom:10px; display: flex; justify-content: space-between; align-items: center;">
@@ -179,6 +310,49 @@
 
         <div id="prayer-list">লোড হচ্ছে...</div>
     </div>
+  <div class="weather-card-premium" id="weather-main-card">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h3 style="margin:0; font-size: 1.1rem; color:white;"><i class="fas fa-map-marker-alt"></i> <span id="location-display">লোকেশন...</span></h3>
+        <span id="current-date" style="font-size: 0.8rem; opacity: 0.9; color:white;">আজ</span>
+    </div>
+    
+    <div style="text-align: center; margin: 20px 0;">
+        <div id="w-icon-large" style="font-size: 4rem; margin-bottom: 5px;">☀️</div>
+        <h1 style="font-size: 3.2rem; margin: 0; font-weight: 800; color:white;"><span id="temp-now">--</span>°C</h1>
+        <p id="weather-desc" style="font-weight: 600; font-size: 1.1rem; margin-top: 5px; color:white;">লোড হচ্ছে...</p>
+    </div>
+
+    <div class="highlights-grid">
+        <div class="highlight-item">
+            <i class="fas fa-sun"></i>
+            <div><span>UV Index</span><b id="uv-idx">--</b></div>
+        </div>
+        <div class="highlight-item">
+            <i class="fas fa-tint"></i>
+            <div><span>আর্দ্রতা</span><b id="humidity">--%</b></div>
+        </div>
+        <div class="highlight-item">
+            <i class="fas fa-wind"></i>
+            <div><span>বাতাস</span><b id="wind-speed">-- km/h</b></div>
+        </div>
+        <div class="highlight-item">
+            <i class="fas fa-cloud-showers-heavy"></i>
+            <div><span>বৃষ্টির সম্ভাবনা</span><b id="rain-chance">--%</b></div>
+        </div>
+    </div>
+</div>
+
+
+</div>
+
+    </div>
+
+    <hr style="border: 0; border-top: 1px solid #eee; margin: 15px 0;">
+
+    <div id="forecast-list" style="display: flex; overflow-x: auto; gap: 15px; padding-bottom: 10px; scrollbar-width: none;">
+        </div>
+</div>
+
 
     <div id="quran-page" class="page">
         <div class="p-head"><i class="fas fa-arrow-left" onclick="closePage('quran-page')"></i> ১১৪ সূরা (অডিও ও অর্থসহ)</div>
@@ -315,7 +489,12 @@
 
             // Sura & Names rendering...
             renderLists();
-        }
+            getLiveWeather();
+           setInterval(getLiveWeather, 3600000); // 
+ 
+            getRandomHadith();
+            
+          }
 
         async function getPrayers() {
             const res = await fetch(`https://api.aladhan.com/v1/timings?latitude=${lat}&longitude=${lon}&method=1`);
@@ -485,6 +664,81 @@ function toggleAdhanMaster() {
         });
     }
     // নতুন কোড এখানে শেষ
+async function getLiveWeather() {
+    const apiKey = 'b9b33da19c284d1e84b141150260904'; 
+    // ৭ দিনের ফোরকাস্ট ডাটা কল করা হয়েছে
+    const url = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=Dhaka&days=7&aqi=no&alerts=no`;
+
+    try {
+        const res = await fetch(url);
+        const data = await res.json();
+        
+        const current = data.current;
+        // আজকের (Day 0) ফোরকাস্ট থেকে বৃষ্টির সম্ভাবনা নেওয়া
+        const todayForecast = data.forecast.forecastday[0].day;
+
+        // UI আপডেট
+        document.getElementById('temp-now').innerText = Math.round(current.temp_c);
+        document.getElementById('weather-desc').innerText = current.condition.text;
+        document.getElementById('uv-idx').innerText = current.uv;
+        document.getElementById('humidity').innerText = current.humidity + '%';
+        document.getElementById('wind-speed').innerText = current.wind_kph + ' km/h';
+        
+        // এখানে ৭ দিনের ডাটাবেজ থেকে আজকের বৃষ্টির পার্সেন্টেজ দেখাচ্ছে
+        document.getElementById('rain-chance').innerText = todayForecast.daily_chance_of_rain + '%';
+        document.getElementById('location-display').innerText = data.location.name;
+
+        // ব্যাকগ্রাউন্ড থিম আপডেট
+        const mainCard = document.getElementById('weather-main-card');
+        const cond = current.condition.text.toLowerCase();
+        const iconLarge = document.getElementById('w-icon-large');
+
+        if (cond.includes('sun') || cond.includes('clear')) {
+            mainCard.style.background = 'linear-gradient(135deg, #FF512F 0%, #F09819 100%)';
+            iconLarge.innerHTML = '☀️';
+        } else if (cond.includes('rain') || cond.includes('shower')) {
+            mainCard.style.background = 'linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)';
+            iconLarge.innerHTML = '🌧️';
+        } else {
+            mainCard.style.background = 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)';
+            iconLarge.innerHTML = '☁️';
+        }
+
+    } catch (e) {
+        console.error("Weather Error:", e);
+    }
+}
+
+
+async function getRandomHadith() {
+    const textEl = document.getElementById('hadith-text');
+    const refEl = document.getElementById('hadith-ref');
+    
+    if(!textEl) return;
+    textEl.style.opacity = "0.5";
+
+    try {
+        // ১ থেকে ৬২৩৬ এর মধ্যে যেকোনো একটি র‍্যান্ডম নাম্বার জেনারেট করা
+        const randomAyah = Math.floor(Math.random() * 6236) + 1;
+        
+        // গ্লোবাল কুরআন API (বাংলা অনুবাদসহ)
+        const response = await fetch(`https://api.alquran.cloud/v1/ayah/${randomAyah}/bn.bengali`);
+        const data = await response.json();
+
+        if (data && data.data) {
+            textEl.innerText = `"${data.data.text}"`;
+            refEl.innerText = `— সূরা ${data.data.surah.englishName} (${data.data.surah.name}), আয়াত: ${data.data.numberInSurah}`;
+        }
+    } catch (error) {
+        // ইন্টারনেট না থাকলে ব্যাকআপ
+        textEl.innerText = "“নিশ্চয়ই কষ্টের সাথেই স্বস্তি রয়েছে।”";
+        refEl.innerText = "— আল-কুরআন";
+    }
+    textEl.style.opacity = "1";
+}
+
+
+setInterval(getRandomHadith, 180000); // প্রতি ৩ মিনিটে পরিবর্তন
 
     </script>
 </body>
