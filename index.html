@@ -175,50 +175,63 @@
     color: #fff;
     display: block;
 }
-.weather-card-premium {
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-    color: white !important;
-    border-radius: 25px;
-    padding: 22px;
-    margin: 20px auto;
-    width: calc(100% - 30px);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
-    box-sizing: border-box;
-}
-
-.highlights-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-    margin-top: 20px;
-    background: rgba(255, 255, 255, 0.2);
+/* সামারি কার্ড */
+.weather-mini-card {
+    background: #fff;
     padding: 15px;
     border-radius: 20px;
-    backdrop-filter: blur(10px);
-}
-
-.highlight-item {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    margin: 15px;
+    cursor: pointer;
 }
 
-.highlight-item i {
-    font-size: 1.4rem;
-    color: #ffd700 !important;
+/* বিস্তারিত প্যানেল */
+.weather-details-panel {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-out;
+    background: #fdfdfd;
+    margin: 0 15px;
+    border-radius: 25px;
+}
+.weather-details-panel.open { max-height: 1000px; padding-bottom: 20px; }
+
+/* সূর্য অ্যানিমেশন */
+.sun-arc {
+    height: 80px;
+    border: 2px dashed #ddd;
+    border-radius: 100px 100px 0 0;
+    position: relative;
+    margin: 20px 40px;
+}
+.sun-moving {
+    position: absolute;
+    font-size: 1.5rem;
+    bottom: -10px;
+    left: 0%; /* JS দিয়ে মুভ হবে */
+    transition: 2s ease-in-out;
 }
 
-.highlight-item div span {
-    display: block;
-    font-size: 0.75rem;
-    color: rgba(255,255,255,0.9);
+/* ৭ দিনের স্ক্রল (সবুজের ছোঁয়া) */
+.forecast-container-green {
+    background: linear-gradient(to right, #e8f5e9, #c8e6c9);
+    padding: 15px;
+    border-radius: 20px;
+    margin: 15px;
 }
+.forecast-scroll { display: flex; gap: 15px; overflow-x: auto; scrollbar-width: none; }
+.forecast-item { min-width: 80px; text-align: center; }
 
-.highlight-item div b {
-    font-size: 1.1rem;
-    color: white !important;
-    font-weight: bold;
-}
+/* কালারিং কার্ডস */
+.info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 15px; }
+.grid-card { padding: 15px; border-radius: 18px; text-align: center; color: white; }
+.color-1 { background: #6c5ce7; } /* বেগুনী */
+.color-2 { background: #fab1a0; } /* হালকা লাল */
+.color-3 { background: #00cec9; } /* টিল নীল */
+
 
     </style>
    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignal.js" async=""></script>
@@ -250,7 +263,6 @@
 
     <audio id="main-audio"></audio>
     <audio id="azan-mp3" src="https://www.islamcan.com/audio/adan/azan2.mp3"></audio>
-
     <div class="hero" id="hero-bg">
         <div class="sky-bg"></div>
         <span class="bis">بِسْمِ اللهِ الرَّحْمٰনِ الرَّحِيْمِ</span>
@@ -310,38 +322,58 @@
 
         <div id="prayer-list">লোড হচ্ছে...</div>
     </div>
-  <div class="weather-card-premium" id="weather-main-card">
-    <div style="display: flex; justify-content: space-between; align-items: center;">
-        <h3 style="margin:0; font-size: 1.1rem; color:white;"><i class="fas fa-map-marker-alt"></i> <span id="location-display">লোকেশন...</span></h3>
-        <span id="current-date" style="font-size: 0.8rem; opacity: 0.9; color:white;">আজ</span>
+<div class="weather-mini-card" onclick="toggleWeatherDetails()">
+    <div id="weather-anim-icon">☀️</div>
+    <div class="mini-info">
+        <h3>আবহাওয়া দেখুন</h3>
+        <p><span id="mini-temp">--</span>°C | <span id="mini-desc">লোড হচ্ছে...</span></p>
     </div>
-    
-    <div style="text-align: center; margin: 20px 0;">
-        <div id="w-icon-large" style="font-size: 4rem; margin-bottom: 5px;">☀️</div>
-        <h1 style="font-size: 3.2rem; margin: 0; font-weight: 800; color:white;"><span id="temp-now">--</span>°C</h1>
-        <p id="weather-desc" style="font-weight: 600; font-size: 1.1rem; margin-top: 5px; color:white;">লোড হচ্ছে...</p>
+    <i class="fas fa-chevron-down"></i>
+</div>
+
+<div id="weather-full-details" class="weather-details-panel">
+    <div class="panel-header">
+        <h2 id="det-loc">লোকেশন...</h2>
+        <p id="det-date">আজ</p>
     </div>
 
-    <div class="highlights-grid">
-        <div class="highlight-item">
-            <i class="fas fa-sun"></i>
-            <div><span>UV Index</span><b id="uv-idx">--</b></div>
+    <div class="sun-path-container">
+        <div class="sun-arc">
+            <div class="sun-moving" id="sun-mover">☀️</div>
         </div>
-        <div class="highlight-item">
-            <i class="fas fa-tint"></i>
-            <div><span>আর্দ্রতা</span><b id="humidity">--%</b></div>
+        <div class="sun-times">
+            <span>🌅 <b id="sr-time">--:--</b></span>
+            <span>🌇 <b id="ss-time">--:--</b></span>
         </div>
-        <div class="highlight-item">
+    </div>
+
+    <div class="forecast-container-green">
+        <div class="forecast-scroll" id="7day-scroll">
+            </div>
+    </div>
+
+    <div class="info-grid">
+        <div class="grid-card color-1">
             <i class="fas fa-wind"></i>
-            <div><span>বাতাস</span><b id="wind-speed">-- km/h</b></div>
+            <p>বাতাস</p>
+            <h4 id="det-wind">-- km/h</h4>
         </div>
-        <div class="highlight-item">
-            <i class="fas fa-cloud-showers-heavy"></i>
-            <div><span>বৃষ্টির সম্ভাবনা</span><b id="rain-chance">--%</b></div>
+        <div class="grid-card color-2">
+            <i class="fas fa-sun"></i>
+            <p>UV Index</p>
+            <h4 id="det-uv">--</h4>
+        </div>
+        <div class="grid-card color-3">
+            <i class="fas fa-tint"></i>
+            <p>আর্দ্রতা</p>
+            <h4 id="det-hum">--%</h4>
         </div>
     </div>
 </div>
 
+</div>
+
+</div>
 
 </div>
 
@@ -664,50 +696,63 @@ function toggleAdhanMaster() {
         });
     }
     // নতুন কোড এখানে শেষ
-async function getLiveWeather() {
-    const apiKey = 'b9b33da19c284d1e84b141150260904'; 
-    // ৭ দিনের ফোরকাস্ট ডাটা কল করা হয়েছে
-    const url = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=Dhaka&days=7&aqi=no&alerts=no`;
+function toggleWeatherDetails() {
+    document.getElementById('weather-full-details').classList.toggle('open');
+}
+
+async function updateLiveWeather() {
+    const apiKey = 'b9b33da19c284d1e84b141150260904';
+    const url = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=auto:ip&days=7`;
 
     try {
         const res = await fetch(url);
         const data = await res.json();
+
+        // ১. সামারি কার্ড আপডেট
+        document.getElementById('mini-temp').innerText = Math.round(data.current.temp_c);
+        document.getElementById('mini-desc').innerText = data.current.condition.text;
+
+        // ২. বিস্তারিত ডাটা
+        document.getElementById('det-loc').innerText = data.location.name;
+        document.getElementById('det-wind').innerText = data.current.wind_kph + ' km/h';
+        document.getElementById('det-uv').innerText = data.current.uv;
+        document.getElementById('det-hum').innerText = data.current.humidity + '%';
         
-        const current = data.current;
-        // আজকের (Day 0) ফোরকাস্ট থেকে বৃষ্টির সম্ভাবনা নেওয়া
-        const todayForecast = data.forecast.forecastday[0].day;
+        // সূর্যোদয় ও সূর্যাস্ত
+        document.getElementById('sr-time').innerText = data.forecast.forecastday[0].astro.sunrise;
+        document.getElementById('ss-time').innerText = data.forecast.forecastday[0].astro.sunset;
 
-        // UI আপডেট
-        document.getElementById('temp-now').innerText = Math.round(current.temp_c);
-        document.getElementById('weather-desc').innerText = current.condition.text;
-        document.getElementById('uv-idx').innerText = current.uv;
-        document.getElementById('humidity').innerText = current.humidity + '%';
-        document.getElementById('wind-speed').innerText = current.wind_kph + ' km/h';
-        
-        // এখানে ৭ দিনের ডাটাবেজ থেকে আজকের বৃষ্টির পার্সেন্টেজ দেখাচ্ছে
-        document.getElementById('rain-chance').innerText = todayForecast.daily_chance_of_rain + '%';
-        document.getElementById('location-display').innerText = data.location.name;
+        // সূর্যের পজিশন অ্যানিমেশন (কাল্পনিক লজিক)
+        document.getElementById('sun-mover').style.left = "60%"; 
 
-        // ব্যাকগ্রাউন্ড থিম আপডেট
-        const mainCard = document.getElementById('weather-main-card');
-        const cond = current.condition.text.toLowerCase();
-        const iconLarge = document.getElementById('w-icon-large');
+        // ৩. ৭ দিনের লিস্ট
+        const scroll = document.getElementById('7day-scroll');
+        scroll.innerHTML = '';
+        data.forecast.forecastday.forEach(day => {
+            const date = new Date(day.date).toLocaleDateString('bn-BD', {weekday: 'short'});
+            scroll.innerHTML += `
+                <div class="forecast-item">
+                    <p style="margin:0; font-weight:bold;">${date}</p>
+                    <span style="font-size:1.5rem;">${getWeatherIcon(day.day.condition.text)}</span>
+                    <p style="margin:0; color:#2d3436;">${Math.round(day.day.maxtemp_c)}°</p>
+                </div>
+            `;
+        });
 
-        if (cond.includes('sun') || cond.includes('clear')) {
-            mainCard.style.background = 'linear-gradient(135deg, #FF512F 0%, #F09819 100%)';
-            iconLarge.innerHTML = '☀️';
-        } else if (cond.includes('rain') || cond.includes('shower')) {
-            mainCard.style.background = 'linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)';
-            iconLarge.innerHTML = '🌧️';
-        } else {
-            mainCard.style.background = 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)';
-            iconLarge.innerHTML = '☁️';
-        }
-
-    } catch (e) {
-        console.error("Weather Error:", e);
-    }
+    } catch (e) { console.log("Error:", e); }
 }
+
+// কন্ডিশন অনুযায়ী আইকন/অ্যানিমেশন সেট করা
+function getWeatherIcon(condition) {
+    const cond = condition.toLowerCase();
+    if (cond.includes('sun') || cond.includes('clear')) return '☀️';
+    if (cond.includes('rain')) return '🌧️';
+    if (cond.includes('thunder')) return '⛈️';
+    if (cond.includes('cloud')) return '☁️';
+    return '🌥️';
+}
+
+updateLiveWeather();
 
 
 async function getRandomHadith() {
