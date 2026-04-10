@@ -267,7 +267,7 @@
         <div id="simple-icon">--</div> 
         <div class="temp-text">
             <h2 id="current-temp">--°C</h2>
-            <p id="simple-location">লোকেশন খোঁজা হচ্ছে...</p>
+            <p id="simple-location">অবস্থান খোঁজা হচ্ছে...</p>
         </div>
     </div>
 </div>
@@ -663,38 +663,37 @@ async function getRandomHadith() {
 
 
 setInterval(getRandomHadith, 180000); // প্রতি ৩ মিনিটে পরিবর্তন
-async function getMyRealWeather() {
-    const apiKey = 'b9b33da19c284d1e84b141150260904';
-    
-    // এখানে কোনো ডিফল্ট লোকেশন নেই, 'auto:ip' আপনার বর্তমান নেটওয়ার্ক টাওয়ার থেকে লোকেশন নেবে
-    const url = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=auto:ip&lang=bn`;
+async function getCorrectWeather() {
+    const apiKey = '64bcbd3b16d1465796625459261004';
+    // সরাসরি Mulghar Union লিখে দেওয়া হয়েছে যাতে অন্য ভুল লোকেশন না আসে
+    const url = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=Mulghar&lang=bn`;
 
     try {
-        const response = await fetch(url);
-        const data = await response.json();
+        const res = await fetch(url);
+        const data = await res.json();
 
-        if (data && data.location) {
-            // ১. সঠিক এলাকা সেট করা (যেমন: Mulghar Union)
-            document.getElementById('simple-location').innerText = data.location.name;
-            
-            // ২. সঠিক তাপমাত্রা সেট করা
+        if (data.current) {
+            // ১. তাপমাত্রা আপডেট (ফোনের সাথে মিলে যাবে)
             document.getElementById('current-temp').innerText = Math.round(data.current.temp_c) + '°C';
             
-            // ৩. দিন/রাত অনুযায়ী আইকন সেট করা
+            // ২. লোকেশন নাম ফিক্স
+            document.getElementById('simple-location').innerText = "মুলঘর ইউনিয়ন";
+
+            // ৩. আইকন ফিক্স (দিনের বেলা চাঁদ আসা বন্ধ করতে)
             const icon = document.getElementById('simple-icon');
-            icon.innerText = data.current.is_day === 1 ? '☀️' : '🌙';
+            const isDay = data.current.is_day; // এটি এপিআই থেকে সরাসরি চেক করবে
             
-            // সবুজের সাথে মিলিয়ে এলাকার নাম রাঙিয়ে দেওয়া
-            document.getElementById('simple-location').style.color = "#2ecc71";
+            if (isDay === 1) {
+                icon.innerText = '☀️'; // দিন হলে সূর্য
+            } else {
+                icon.innerText = '🌙'; // রাত হলে চাঁদ
+            }
         }
-    } catch (error) {
-        document.getElementById('simple-location').innerText = "নেটওয়ার্ক এরর";
+    } catch (e) {
+        console.log("Weather error");
     }
 }
-
-// পেজ লোড হলে ফাংশনটি কল করুন
-window.addEventListener('load', getMyRealWeather);
-
+window.addEventListener('load', getCorrectWeather);
 
     </script>
 </body>
