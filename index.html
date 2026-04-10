@@ -264,13 +264,14 @@
     </div>
 <div class="weather-center-wrapper">
     <div class="mini-temp-widget-premium">
-        <div id="simple-icon">☀️</div>
+        <div id="simple-icon">☀️</div> 
         <div class="temp-text">
             <h2 id="current-temp">--°C</h2>
             <p id="simple-location">লোকেশন লোড হচ্ছে...</p>
         </div>
     </div>
 </div>
+
 
     <div class="rail" id="event-rail">
         <div class="rail-card c-1" onclick="openPage('names-page')"><h6>আসমাউল হুসনা</h6><b>৯৯ নাম</b></div>
@@ -663,7 +664,33 @@ async function getRandomHadith() {
 
 
 setInterval(getRandomHadith, 180000); // প্রতি ৩ মিনিটে পরিবর্তন
-document.getElementById('location-name').innerText = data.location.name;
+async function updateWeatherInfo() {
+    const apiKey = 'b9b33da19c284d1e84b141150260904';
+    // auto:ip দিলে জিপিএস ছাড়াও আপনার এলাকা (যেমন: Dhaka বা Bhola) চলে আসবে
+    const url = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=auto:ip&lang=bn`;
+
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+
+        if (data.current) {
+            // HTML-এর আইডি অনুযায়ী ডাটা বসানো হচ্ছে
+            document.getElementById('current-temp').innerText = Math.round(data.current.temp_c) + '°C';
+            document.getElementById('simple-location').innerText = data.location.name;
+            
+            // দিন না রাত সেই অনুযায়ী আইকন বদলানো
+            const icon = document.getElementById('simple-icon');
+            icon.innerText = data.current.is_day === 1 ? '☀️' : '🌙';
+        }
+    } catch (error) {
+        document.getElementById('simple-location').innerText = "ইন্টারনেট নেই";
+        console.log("Weather error:", error);
+    }
+}
+
+// এটি আপনার উইন্ডো লোড হওয়ার পর রান হবে
+window.addEventListener('load', updateWeatherInfo);
+
 
     </script>
 </body>
