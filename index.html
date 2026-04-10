@@ -175,33 +175,40 @@
     color: #fff;
     display: block;
 }
-.weather-premium-box {
+.weather-center-wrapper {
+    display: flex;
+    justify-content: center; /* মাঝখানে আনবে */
+    align-items: center;
+    width: 100%;
+    margin: 20px 0; /* উপরে-নিচে গ্যাপ দিবে */
+}
+
+.mini-temp-widget-premium {
     background: #ffffff;
-    border-radius: 30px;
-    margin: 20px;
-    padding: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-    min-height: 200px;
+    border-radius: 20px;
+    padding: 12px 25px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    border: 1px solid #f0f0f0;
 }
 
-/* লোডিং স্টাইল */
-.loader-style { text-align: center; padding: 40px 0; color: #2ecc71; }
-.spinner { 
-    width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid #2ecc71; 
-    border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 10px;
+#simple-icon { font-size: 2rem; }
+
+.temp-text h2 { 
+    margin: 0; 
+    font-size: 1.6rem; 
+    color: #2d3436;
+    line-height: 1;
 }
-@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-/* আইকন অ্যানিমেশন */
-.icon-floating { font-size: 4.5rem; animation: floatAnim 3s ease-in-out infinite; }
-@keyframes floatAnim { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
-
-/* গ্রিন জোন ও গ্রিড */
-.info-grid-premium { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 20px 0; }
-.i-card { padding: 12px 5px; border-radius: 15px; color: white; text-align: center; font-size: 0.8rem; }
-.uv-card { background: #ff7675; } .hum-card { background: #74b9ff; } .wind-card { background: #a29bfe; }
-.weekly-green-zone { background: #e8f5e9; padding: 15px; border-radius: 20px; border-left: 5px solid #2ecc71; }
-.horizontal-scroll { display: flex; gap: 15px; overflow-x: auto; scrollbar-width: none; margin-top: 10px; }
+#simple-location {
+    margin: 3px 0 0;
+    font-size: 0.8rem;
+    color: #2ecc71; /* সবুজের সাথে মিল রেখে */
+    font-weight: bold;
+}
 
     </style>
    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignal.js" async=""></script>
@@ -255,6 +262,15 @@
         <div class="date-box" style="border-left:1px solid #eee; border-right:1px solid #eee;"><h6>বাংলা</h6><b id="bn-date">লোড হচ্ছে...</b></div>
         <div class="date-box"><h6>ইংরেজি</h6><b id="en-date">লোড হচ্ছে...</b></div>
     </div>
+<div class="weather-center-wrapper">
+    <div class="mini-temp-widget-premium">
+        <div id="simple-icon">☀️</div>
+        <div class="temp-text">
+            <h2 id="current-temp">--°C</h2>
+            <p id="simple-location">লোকেশন লোড হচ্ছে...</p>
+        </div>
+    </div>
+</div>
 
     <div class="rail" id="event-rail">
         <div class="rail-card c-1" onclick="openPage('names-page')"><h6>আসমাউল হুসনা</h6><b>৯৯ নাম</b></div>
@@ -292,41 +308,6 @@
 
         <div id="prayer-list">লোড হচ্ছে...</div>
     </div>
-<div class="weather-premium-box" id="main-weather-container">
-    <div id="weather-loader" class="loader-style">
-        <div class="spinner"></div>
-        <p>আপনার এলাকার আবহাওয়া চেক করছি...</p>
-    </div>
-
-    <div id="weather-content" style="display: none;">
-        <div class="weather-header-ui">
-            <h2 id="final-loc"><i class="fas fa-map-marker-alt"></i> লোকেশন...</h2>
-            <span id="update-time">লাইভ</span>
-        </div>
-
-        <div class="hero-weather">
-            <div id="big-icon-anim" class="icon-floating">☀️</div>
-            <div class="temp-display-ui">
-                <h1 id="final-temp">--</h1><span class="unit-ui">°C</span>
-                <p id="final-desc">পরিষ্কার আকাশ</p>
-            </div>
-        </div>
-
-        <div class="info-grid-premium">
-            <div class="i-card uv-card"><i class="fas fa-sun"></i> UV <b id="final-uv">--</b></div>
-            <div class="i-card hum-card"><i class="fas fa-tint"></i> আর্দ্রতা <b id="final-hum">--%</b></div>
-            <div class="i-card wind-card"><i class="fas fa-wind"></i> বাতাস <b id="final-wind">--</b></div>
-        </div>
-
-        <div class="weekly-green-zone">
-            <p class="zone-title">আগামী ৭ দিনের বৃষ্টির সম্ভাবনা</p>
-            <div class="horizontal-scroll" id="weekly-list">
-                </div>
-        </div>
-    </div>
-</div>
-
-</div>
 
 </div>
 
@@ -651,63 +632,6 @@ function toggleAdhanMaster() {
         });
     }
     // নতুন কোড এখানে শেষ
-async function startWeatherSystem() {
-    const loader = document.getElementById('weather-loader');
-    const content = document.getElementById('weather-content');
-
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(async (pos) => {
-            const lat = pos.coords.latitude;
-            const lon = pos.coords.longitude;
-            const apiKey = 'b9b33da19c284d1e84b141150260904';
-            const url = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${lat},${lon}&days=7&lang=bn`;
-
-            try {
-                const res = await fetch(url);
-                const data = await res.json();
-
-                // তথ্য বসানো
-                document.getElementById('final-loc').innerText = data.location.name;
-                document.getElementById('final-temp').innerText = Math.round(data.current.temp_c);
-                document.getElementById('final-desc').innerText = data.current.condition.text;
-                document.getElementById('final-uv').innerText = data.current.uv;
-                document.getElementById('final-hum').innerText = data.current.humidity + '%';
-                document.getElementById('final-wind').innerText = Math.round(data.current.wind_kph) + ' km/h';
-
-                // দিন/রাত আইকন ফিক্স
-                const icon = document.getElementById('big-icon-anim');
-                icon.innerHTML = (data.current.is_day === 1) ? '☀️' : '🌙';
-
-                // সাপ্তাহিক লিস্ট
-                const list = document.getElementById('weekly-list');
-                list.innerHTML = '';
-                data.forecast.forecastday.forEach(day => {
-                    const d = new Date(day.date).toLocaleDateString('bn-BD', {weekday: 'short'});
-                    list.innerHTML += `
-                        <div style="text-align:center; min-width:60px;">
-                            <span style="font-size:0.7rem; color:#666;">${d}</span>
-                            <span style="display:block; font-size:1.2rem;">💧</span>
-                            <b style="color:#2ecc71;">${day.day.daily_chance_of_rain}%</b>
-                        </div>`;
-                });
-
-                // লোডিং শেষ, কন্টেন্ট দেখাও
-                loader.style.display = 'none';
-                content.style.display = 'block';
-
-            } catch (err) {
-                loader.innerHTML = "সার্ভার এরর! ইন্টারনেট চেক করুন।";
-            }
-        }, () => {
-            loader.innerHTML = "দয়া করে লোকেশন পারমিশন দিন।";
-        });
-    } else {
-        loader.innerHTML = "আপনার ব্রাউজার GPS সাপোর্ট করে না।";
-    }
-}
-
-// পেজ পুরোপুরি লোড হলে রান হবে
-window.addEventListener('DOMContentLoaded', startWeatherSystem);
 
 
 async function getRandomHadith() {
@@ -739,6 +663,7 @@ async function getRandomHadith() {
 
 
 setInterval(getRandomHadith, 180000); // প্রতি ৩ মিনিটে পরিবর্তন
+document.getElementById('location-name').innerText = data.location.name;
 
     </script>
 </body>
