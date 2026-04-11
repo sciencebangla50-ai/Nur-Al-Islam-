@@ -209,6 +209,137 @@
     color: #2ecc71; /* সবুজের সাথে মিল রেখে */
     font-weight: bold;
 }
+/* স্ট্যাটাস বক্স ডিজাইন (গাঢ় গ্লাস লুক যাতে লেখা স্পষ্ট হয়) */
+.top-stats-container {
+    display: flex; justify-content: flex-end; gap: 10px; padding: 15px 15px 5px;
+}
+.stat-pill-premium {
+    background: rgba(0, 0, 0, 0.4); /* গাঢ় ব্যাকগ্রাউন্ড যাতে সাদা লেখা স্পষ্ট হয় */
+    backdrop-filter: blur(8px);
+    padding: 6px 15px;
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex; align-items: center; gap: 8px;
+}
+.stat-pill-premium span { color: #fff; font-weight: 800; font-size: 15px; }
+
+/* নামাজ কার্ড ও বাটন */
+.prayer-tracker-card { background: white; margin: 15px; padding: 20px; border-radius: 25px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.08); }
+.time-notice { background: #fff3cd; color: #856404; padding: 5px; border-radius: 10px; font-size: 11px; margin-top: 5px; font-weight: bold; }
+.prayer-buttons-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; justify-content: center; }
+.p-btn-modern { border: 2px solid #eee; background: #fff; padding: 10px 18px; border-radius: 15px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+.p-btn-modern.selected { background: #e8f5e9; border-color: #2ecc71; color: #2ecc71; }
+.p-btn-modern.finalized { background: #2ecc71; color: white; border-color: #2ecc71; }
+.claim-action-btn { width: 100%; margin-top: 20px; padding: 15px; border-radius: 15px; border: none; background: linear-gradient(135deg, #2ecc71, #27ae60); color: white; font-weight: bold; font-size: 16px; }
+
+/* প্রিমিয়াম পপআপ */
+.custom-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: flex; justify-content: center; align-items: center; z-index: 100000; animation: fadeIn 0.3s; }
+.modal-card { background: white; padding: 35px 25px; border-radius: 30px; text-align: center; width: 85%; max-width: 320px; position: relative; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* ৩-ডট মেনু ও হেডার */
+.top-nav { position: fixed; top: 0; left: 0; width: 100%; height: 60px; display: flex; align-items: center; padding: 0 15px; z-index: 1000; }
+.menu-btn { font-size: 28px; cursor: pointer; color: #333; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; background: #fff; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+.user-identity { display: flex; align-items: center; margin-left: 15px; background: #fff; padding: 5px 12px; border-radius: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+.user-identity img { width: 30px; height: 30px; border-radius: 50%; margin-right: 8px; }
+
+/* ড্রয়ার ডিজাইন */
+.drawer-ui { position: fixed; top: 0; left: -310px; width: 300px; height: 100%; background: #fff; z-index: 10001; transition: 0.4s cubic-bezier(0.17, 0.67, 0.83, 0.67); }
+.drawer-ui.active { left: 0; }
+.drawer-header-pro { padding: 40px 20px; text-align: center; border-bottom: 1px solid #f0f0f0; cursor: pointer; }
+.drawer-pfp-wrap { position: relative; width: 100px; height: 100px; margin: 0 auto 10px; }
+.drawer-pfp-wrap img { width: 100%; height: 100%; border-radius: 50%; border: 3px solid #2ecc71; padding: 3px; }
+.view-tag { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #2ecc71; color: #fff; font-size: 11px; padding: 2px 10px; border-radius: 20px; white-space: nowrap; }
+
+/* প্রোফাইল পেজ UI */
+.full-ui-screen { position: fixed; top: 0; right: -100%; width: 100%; height: 100%; background: #fdfdfd; z-index: 20000; transition: 0.5s; overflow-y: auto; }
+.full-ui-screen.active { right: 0; }
+.screen-header { display: flex; align-items: center; padding: 20px; background: #fff; border-bottom: 1px solid #eee; }
+.screen-header button { border: none; background: #e8f5e9; color: #2ecc71; padding: 10px 15px; border-radius: 12px; font-weight: bold; }
+.pfp-frame { position: relative; width: 120px; height: 120px; margin: 30px auto; }
+.pfp-frame img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 4px solid #fff; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+.pencel-badge { position: absolute; bottom: 5px; right: 5px; background: #2ecc71; color: #fff; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 3px solid #fff; }
+
+/* ফর্ম ও বাটন */
+.premium-form { padding: 0 25px; }
+.input-card { margin-bottom: 20px; }
+.field-box { display: flex; align-items: center; background: #f5f6f7; padding: 10px 15px; border-radius: 15px; margin-top: 8px; }
+.field-box input, .field-box select { flex: 1; border: none; background: transparent; outline: none; font-size: 15px; }
+.prime-save-btn { width: 100%; padding: 18px; background: #2ecc71; color: #fff; border: none; border-radius: 18px; font-weight: bold; font-size: 16px; margin-top: 20px; box-shadow: 0 8px 20px rgba(46, 204, 113, 0.3); }
+
+/* পপ-আপ */
+.pop-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); display: none; align-items: center; justify-content: center; z-index: 50000; }
+.pop-card { background: #fff; width: 85%; padding: 30px; border-radius: 30px; text-align: center; }
+.pop-icon { width: 60px; height: 60px; border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 30px; }
+.overlay-blur { position: fixed; inset: 0; background: rgba(0,0,0,0.3); backdrop-filter: blur(4px); display: none; z-index: 10000; }
+:root {
+    --bg: #f8f9fa;
+    --card-bg: #ffffff;
+    --text: #2d3436;
+}
+
+body.dark-theme {
+    --bg: #121212;
+    --card-bg: #1e1e1e;
+    --text: #ffffff;
+}
+
+/* নামাজের কার্ড ও সব উজ্জ্বল কার্ড ফিক্স */
+body.dark-theme .time-card, 
+body.dark-theme .stat-pill-premium,
+body.dark-theme .full-ui-screen,
+body.dark-theme [style*="background:#fff"],
+body.dark-theme [style*="background: white"] {
+    background: var(--card-bg) !important;
+    color: var(--text) !important;
+}
+
+body { background: var(--bg); color: var(--text); transition: 0.3s; }
+
+/* সেটিংস কার্ড ডিজাইন */
+.pro-card-row {
+    background: var(--card-bg);
+    margin: 10px;
+    padding: 18px;
+    border-radius: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+}
+
+/* ব্যাক বাটন সাইজ ঠিক করা */
+.back-btn {
+    background: #333;
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    margin-right: 15px;
+}
+
+/* টগল বাটন ডিজাইন */
+.pro-switch { position: relative; width: 46px; height: 24px; }
+.pro-switch input { opacity: 0; width: 0; height: 0; }
+.pro-slider { position: absolute; inset: 0; background: #ccc; border-radius: 34px; cursor: pointer; transition: 0.4s; }
+.pro-slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background: #fff; border-radius: 50%; transition: 0.4s; }
+input:checked + .pro-slider { background: #2ecc71; }
+input:checked + .pro-slider:before { transform: translateX(22px); }
+:root { --bg: #f8f9fa; --card-bg: #ffffff; --text: #2d3436; }
+body.dark-theme { --bg: #121212; --card-bg: #1e1e1e; --text: #ffffff; }
+
+body { background: var(--bg); color: var(--text); transition: 0.3s; }
+
+/* স্লাইডার বাটন ডিজাইন */
+.pro-switch { position: relative; width: 50px; height: 26px; }
+.pro-switch input { opacity: 0; width: 0; height: 0; }
+.pro-slider { position: absolute; inset: 0; background: #ccc; border-radius: 34px; cursor: pointer; transition: 0.4s; }
+.pro-slider:before { position: absolute; content: ""; height: 20px; width: 20px; left: 3px; bottom: 3px; background: white; border-radius: 50%; transition: 0.4s; }
+input:checked + .pro-slider { background: #2ecc71; }
+input:checked + .pro-slider:before { transform: translateX(24px); }
 
     </style>
    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignal.js" async=""></script>
@@ -237,9 +368,209 @@
 
 </head>
 <body>
+<div class="top-nav">
+    <div class="menu-btn" onclick="openDrawer()">☰</div>
+    <div class="user-identity" id="top-user-info" style="display:none">
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" id="top-pfp">
+        <span id="top-name">ব্যবহারকারী</span>
+    </div>
+</div>
+
+<div id="appDrawer" class="drawer-ui">
+    <div class="drawer-header-pro" onclick="openProfilePage()">
+        <div class="drawer-pfp-wrap">
+            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" id="nav-avatar">
+            <div class="view-tag">প্রোফাইল দেখুন</div>
+        </div>
+        <h4 id="nav-name-label">ব্যবহারকারী</h4>
+        
+</div>
+<div class="nav-item-premium" onclick="openFullPage('settings-screen')" style="margin: 10px 15px; padding: 15px; background: #2c2c2c; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
+    <div style="display: flex; align-items: center; gap: 12px;">
+        <span style="font-size: 20px;">⚙️</span>
+        <span style="color: white; font-weight: 500;">সেটিংস</span>
+    </div>
+    <span style="color: #666;">❯</span>
+</div>
+<div onclick="openFullPage('rules-screen')" style="margin: 10px 15px; padding: 15px; background: #2c2c2c; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
+    <div style="display: flex; align-items: center; gap: 12px;">
+        <span style="font-size: 20px;">📜</span>
+        <span style="color: white; font-weight: bold;">অ্যাপের নিয়মাবলি</span>
+    </div>
+    <span style="color: #888;">❯</span>
+</div>
+<div class="nav-item-premium" onclick="shareApp()" style="margin: 10px 15px; padding: 15px; background: #2c2c2c; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
+    <div style="display: flex; align-items: center; gap: 12px;">
+        <span style="font-size: 20px;">📤</span>
+        <span style="color: white; font-weight: 500;">বন্ধুদের সাথে শেয়ার করুন</span>
+    </div>
+    <span style="color: #666;">❯</span>
+</div>
+<div onclick="openWhatsApp()" style="margin: 10px 15px; padding: 15px; background: #2c2c2c; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; border: 1px solid rgba(255,255,255,0.05);">
+    <div style="display: flex; align-items: center; gap: 12px;">
+        <span style="font-size: 20px;">💬</span>
+        <span style="color: white; font-weight: bold;">লাইভ চ্যাট (হোয়াটসঅ্যাপ)</span>
+    </div>
+    <span style="color: #25D366;">● Online</span>
+</div>
+
+<div id="rules-screen" style="display: none; position: fixed; inset: 0; background: #121212; z-index: 99999; flex-direction: column; width: 100%; height: 100%;">
+    <div style="display: flex; align-items: center; padding: 18px; background: #1e1e1e; border-bottom: 1px solid rgba(255,255,255,0.1);">
+        <div onclick="document.getElementById('rules-screen').style.display='none'" style="background: #333; color: white; width: 40px; height: 40px; border-radius: 10px; display: flex; justify-content: center; align-items: center; cursor: pointer;">❮</div>
+        <h3 style="margin-left: 15px; color: white; font-size: 18px;">নিয়ম ও শর্তাবলি</h3>
+    </div>
+
+    <div style="padding: 20px; overflow-y: auto; flex: 1;">
+        <div style="background: #1e1e1e; padding: 25px; border-radius: 20px; color: #ffffff; line-height: 2; text-align: justify; font-size: 15px;">
+            <b>আসসালামু আলাইকুম ওয়া রহমাতুল্লাহ। সকল প্রশংসা মহান আল্লাহ রাব্বুল আলামীনের, যিনি আমাদের দ্বীনের পথে চলার তাওফিক দান করেছেন।</b><br><br>
+            
+            <b>রাসূলুল্লাহ (সা.) বলেছেন: "যে ব্যক্তি মানুষকে সৎ পথের দিকে ডাকবে, সে তার অনুসারীদের সমান সওয়াব পাবে, অথচ তাদের সওয়াব থেকে বিন্দুমাত্র কমানো হবে না।" (সহীহ মুসলিম: ২৬৭৪)। এই অ্যাপটির উদ্দেশ্য হলো ডিজিটাল মাধ্যম ব্যবহার করে আপনাদের ইবাদতকে সহজতর করা।</b><br><br>
+            
+            <b>অ্যাপটি ব্যবহারের ক্ষেত্রে নিম্নলিখিত ইসলামিক নিয়ম ও শর্তাবলি মেনে চলা জরুরি:</b><br><br>
+            
+            <b>১. ইখলাস ও শুদ্ধ নিয়ত: এই অ্যাপটি ব্যবহারের পেছনে আপনার মূল উদ্দেশ্য হতে হবে আল্লাহর সন্তুষ্টি। কোনো প্রকার দুনিয়াবী প্রদর্শনী, লোক দেখানো ইবাদত বা অনৈতিক কাজে এই প্ল্যাটফর্মটি ব্যবহার করা থেকে বিরত থাকুন। মনে রাখবেন, আল্লাহ আপনার অন্তরের খবর জানেন।</b><br><br>
+            
+            <b>২. পবিত্রতা ও ধর্মীয় আদব: অ্যাপটিতে কুরআন ও হাদিসের বাণী থাকায় এটি ব্যবহারের সময় সর্বোচ্চ সম্মান বজায় রাখা বাঞ্ছনীয়। দ্বীনি বিষয় নিয়ে ঠাট্টা বা কোনো প্রকার বিতর্ক সৃষ্টি করা সম্পূর্ণ নিষিদ্ধ।</b><br><br>
+            
+            <b>৩. সঠিক তথ্যের আমানত: আমরা সব সময় চেষ্টা করি সঠিক তথ্য (যেমন নামাজের সময় ও হাদিস) প্রদান করতে। তবুও মানুষ হিসেবে আমাদের ভুল হতে পারে। যদি কোনো ভুল আপনার নজরে আসে, তবে তা দ্রুত আমাদের জানান। ভুল সংশোধনে সাহায্য করা মুমিনের অন্যতম বৈশিষ্ট্য।</b><br><br>
+            
+            <b>৪. রিওয়ার্ড ও পয়েন্টের নীতিমালা: অ্যাপের ভেতরের পয়েন্ট সিস্টেমটি শুধুমাত্র ইবাদতে ধারাবাহিকতা রাখার একটি মাধ্যম। একে লটারি বা জুয়া হিসেবে দেখার কোনো সুযোগ নেই। আপনার প্রকৃত রিওয়ার্ড বা সওয়াব মহান আল্লাহর কাছেই সংরক্ষিত।</b><br><br>
+            
+            <b>৫. ব্যক্তিগত আমানত ও ডেটা: আপনার ব্যক্তিগত তথ্য আমাদের কাছে একটি পবিত্র আমানত। আমরা আপনার কোনো তথ্য বাণিজ্যিক উদ্দেশ্যে ব্যবহার করি না। দ্বীনি নীতি মেনেই আমরা আপনার গোপনীয়তা রক্ষা করি।</b><br><br>
+            
+            <b>৬. প্রচারণা ও সদকায়ে জারিয়া: অ্যাপের ভালো কন্টেন্টগুলো শেয়ার করার মাধ্যমে আপনি সওয়াবের অংশীদার হতে পারেন। তবে অনুমতি ছাড়া অ্যাপের কোনো অংশ পরিবর্তন বা কপি করা থেকে বিরত থাকুন।</b><br><br>
+            
+            <b>আল্লাহ তায়ালা আমাদের এই ক্ষুদ্র প্রচেষ্টাকে কবুল করুন এবং একে আমাদের পরকালের নাজাতের অছিলা বানিয়ে দিন। আমিন।</b>
+        </div>
+    </div>
+</div>
+
+<script>
+function openFullPage(id) {
+    // যদি ড্রয়ার ফাংশন থাকে তবে তা কল করা
+    try { closeDrawer(); } catch(e) {}
+    
+    var el = document.getElementById(id);
+    if(el) {
+        el.style.setProperty('display', 'flex', 'important');
+    } else {
+        alert("আইডি পাওয়া যায়নি!");
+    }
+}
+</script>
+
+    </div>
+<div id="drawerOverlay" class="overlay-blur" onclick="closeDrawer()"></div>
+
+<div id="profile-screen" class="full-ui-screen">
+    <div class="screen-header">
+        <button onclick="closeProfilePage()">❮</button>
+        <h3>প্রোফাইল এডিট</h3>
+    </div>
+    
+    <div class="screen-content">
+        <div class="edit-pfp-center">
+            <div class="pfp-frame">
+                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" id="preview-img">
+                <label for="pfp-input" class="pencel-badge">✎</label>
+                <input type="file" id="pfp-input" hidden onchange="handleImage(event)">
+            </div>
+        </div>
+
+        <div class="premium-form">
+            <div class="input-card">
+                <label>আপনার নাম</label>
+                <div class="field-box"><input type="text" id="user-name" placeholder="নাম লিখুন"> <span>✎</span></div>
+            </div>
+            <div class="input-card">
+                <label>জেন্ডার</label>
+                <div class="field-box">
+                    <select id="user-gender"><option>পুরুষ</option><option>মহিলা</option></select>
+                    <span>✎</span>
+                </div>
+            </div>
+            <div class="input-card">
+                <label>জন্ম তারিখ</label>
+                <div class="field-box"><input type="date" id="user-dob"> <span>✎</span></div>
+            </div>
+            
+            <button class="prime-save-btn" onclick="validateAndSave()">সেভ করুন</button>
+        </div>
+    </div>
+</div>
+
+<div id="statusPopup" class="pop-overlay">
+    <div class="pop-card">
+        <div id="pop-icon" class="pop-icon"></div>
+        <h2 id="pop-title"></h2>
+        <p id="pop-msg"></p>
+        <button onclick="closePop()">ঠিক আছে</button>
+    </div>
+</div>
+<div id="settings-screen" class="full-ui-screen" style="display: none; position: fixed; inset: 0; background: var(--bg); z-index: 9999; flex-direction: column;">
+    <div class="screen-header-pro" style="display: flex; align-items: center; padding: 15px; background: var(--card-bg); border-bottom: 1px solid rgba(255,255,255,0.1);">
+        <button onclick="closeFullPage('settings-screen')" class="back-btn" style="background: #333; color: white; border: none; width: 40px; height: 40px; border-radius: 10px; cursor: pointer;">❮</button>
+        <h3 style="margin-left: 15px; color: var(--text);">সেটিংস</h3>
+    </div>
+
+    <div class="screen-content" style="padding: 15px;">
+        <div class="pro-card-row" style="background: var(--card-bg); padding: 20px; border-radius: 15px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <span>🌙</span>
+                <span style="color: var(--text); font-weight: 500;">ডার্ক মোড</span>
+            </div>
+            <label class="pro-switch">
+                <input type="checkbox" id="dark-mode-toggle" onchange="toggleDarkMode()">
+                <span class="pro-slider"></span>
+            </label>
+        </div>
+
+        <div class="pro-card-row" style="background: var(--card-bg); padding: 20px; border-radius: 15px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <span>🔔</span>
+                <span style="color: var(--text); font-weight: 500;">নোটিফিকেশন</span>
+            </div>
+            <label class="pro-switch">
+                <input type="checkbox" checked>
+                <span class="pro-slider"></span>
+            </label>
+            
+        </div>
+        
+    </div>
+    
+</div>
+
+</div>
 
     <audio id="main-audio"></audio>
     <audio id="azan-mp3" src="https://www.islamcan.com/audio/adan/azan2.mp3"></audio>
+    <div class="top-stats-container">
+    <div class="stat-pill-premium">
+        <span class="pill-icon">🪙</span>
+        <span id="user-total-coins">0</span>
+    </div>
+    <div class="stat-pill-premium">
+        <span class="pill-icon">🕋</span>
+        <span id="user-prayer-count">0/5</span>
+    </div>
+</div>
+
+<div class="prayer-tracker-card">
+    <div class="card-header">
+        <h4>আজ কয় ওয়াক্ত নামাজ পড়েছেন?</h4>
+        <div class="time-notice">🕒 রাত ৮টা - ১২টা পর্যন্ত সংগ্রহ করুন</div>
+    </div>
+    <div class="prayer-buttons-grid">
+        <button class="p-btn-modern" id="sel-fajr" onclick="toggleSelect('fajr')">ফজর</button>
+        <button class="p-btn-modern" id="sel-dhuhr" onclick="toggleSelect('dhuhr')">জোহর</button>
+        <button class="p-btn-modern" id="sel-asr" onclick="toggleSelect('asr')">আসর</button>
+        <button class="p-btn-modern" id="sel-maghrib" onclick="toggleSelect('maghrib')">মাগরিব</button>
+        <button class="p-btn-modern" id="sel-isha" onclick="toggleSelect('isha')">এশা</button>
+    </div>
+    <button id="claim-all-btn" class="claim-action-btn" onclick="claimAllCoins()">🎁 কয়েন সংগ্রহ করুন</button>
+</div>
+
     <div class="hero" id="hero-bg">
         <div class="sky-bg"></div>
         <span class="bis">بِسْمِ اللهِ الرَّحْمٰনِ الرَّحِيْمِ</span>
@@ -694,6 +1025,216 @@ async function getCorrectWeather() {
     }
 }
 window.addEventListener('load', getCorrectWeather);
+// ১. প্রাথমিক ডেটা লোড (জিরো চেক)
+let totalCoins = parseInt(localStorage.getItem('totalCoins')) || 0;
+let selectedPrayers = JSON.parse(localStorage.getItem('selectedPrayers')) || [];
+const todayStr = new Date().toDateString();
+
+// প্রতিদিন অটো রিসেট কিন্তু কয়েন থাকবে
+if (localStorage.getItem('lastOpenDate') !== todayStr) {
+    selectedPrayers = [];
+    localStorage.setItem('selectedPrayers', JSON.stringify([]));
+    localStorage.setItem('lastOpenDate', todayStr);
+}
+
+let isClaimedToday = localStorage.getItem('claimedDate') === todayStr;
+
+function toggleSelect(id) {
+    if (isClaimedToday) return;
+    const index = selectedPrayers.indexOf(id);
+    if (index > -1) selectedPrayers.splice(index, 1);
+    else selectedPrayers.push(id);
+    localStorage.setItem('selectedPrayers', JSON.stringify(selectedPrayers));
+    updateTrackerUI();
+}
+
+function claimAllCoins() {
+    const hr = new Date().getHours();
+    
+    // রাত ৮টা (২০) থেকে ১২টা পর্যন্ত লকিং
+    if (hr < 20 && hr !== 0) {
+        showPremiumPopup("🕒 সময় হয়নি!", "রাত ৮টার পর কয়েন সংগ্রহ করুন। ইনশাআল্লাহ্।", "#f39c12");
+        return;
+    }
+    if (selectedPrayers.length === 0) return showPremiumPopup("দুঃখিত!", "ওয়াক্ত সিলেক্ট করুন।", "#e74c3c");
+
+    const earned = selectedPrayers.length * 5;
+    totalCoins += earned;
+    localStorage.setItem('totalCoins', totalCoins);
+    localStorage.setItem('claimedDate', todayStr);
+    isClaimedToday = true;
+
+    showPremiumPopup("🎉 মাশাআল্লাহ্!", `আপনি আজ ${earned} কয়েন পেয়েছেন।`, "#2ecc71");
+    updateTrackerUI();
+}
+
+function updateTrackerUI() {
+    document.getElementById('user-total-coins').innerText = totalCoins;
+    document.getElementById('user-prayer-count').innerText = selectedPrayers.length + "/5";
+    
+    document.querySelectorAll('.p-btn-modern').forEach(btn => {
+        const id = btn.id.replace('sel-', '');
+        btn.classList.toggle('selected', selectedPrayers.includes(id));
+        if (isClaimedToday && selectedPrayers.includes(id)) btn.classList.add('finalized');
+    });
+
+    if (isClaimedToday) {
+        const cBtn = document.getElementById('claim-all-btn');
+        cBtn.innerText = "আজকের কয়েন সংগ্রহ হয়েছে";
+        cBtn.disabled = true;
+        cBtn.style.opacity = "0.7";
+    }
+}
+
+function showPremiumPopup(title, msg, color) {
+    const div = document.createElement('div');
+    div.className = 'custom-modal-overlay';
+    div.innerHTML = `
+        <div class="modal-card" style="border-top: 8px solid ${color}">
+            <h2 style="color: ${color}; margin-bottom: 10px;">${title}</h2>
+            <p style="color: #555; line-height: 1.5;">${msg}</p>
+            <button class="claim-action-btn" onclick="this.parentElement.parentElement.remove()" style="background: ${color}">ঠিক আছে</button>
+        </div>`;
+    document.body.appendChild(div);
+}
+
+// লোড হওয়ার সাথে সাথে জিরো বা আগের ডাটা শো করবে
+window.addEventListener('load', updateTrackerUI);
+
+function openDrawer() {
+    document.getElementById('appDrawer').classList.add('active');
+    document.getElementById('drawerOverlay').style.display = 'block';
+}
+
+function closeDrawer() {
+    document.getElementById('appDrawer').classList.remove('active');
+    document.getElementById('drawerOverlay').style.display = 'none';
+}
+
+function openProfilePage() {
+    document.getElementById('profile-screen').classList.add('active');
+}
+
+function closeProfilePage() {
+    document.getElementById('profile-screen').classList.remove('active');
+}
+
+function handleImage(e) {
+    const reader = new FileReader();
+    reader.onload = function() {
+        document.getElementById('preview-img').src = reader.result;
+        document.getElementById('nav-avatar').src = reader.result;
+        document.getElementById('top-pfp').src = reader.result;
+    }
+    reader.readAsDataURL(e.target.files[0]);
+}
+
+function validateAndSave() {
+    const name = document.getElementById('user-name').value;
+    const dob = document.getElementById('user-dob').value;
+    const pop = document.getElementById('statusPopup');
+    const icon = document.getElementById('pop-icon');
+
+    if (!name || !dob) {
+        showPop("ভুল হয়েছে!", "অনুগ্রহ করে সকল সঠিক তথ্য পূরণ করুন।", "#e74c3c", "✖");
+    } else {
+        // তথ্য সেভ করার পর আপডেট
+        document.getElementById('nav-name-label').innerText = name;
+        document.getElementById('top-name').innerText = name;
+        document.getElementById('top-user-info').style.display = 'flex';
+        showPop("অসাধারণ!", "আপনার তথ্য সফলভাবে সংরক্ষিত হয়েছে।", "#2ecc71", "✓");
+    }
+}
+
+function showPop(title, msg, color, iconChar) {
+    document.getElementById('pop-title').innerText = title;
+    document.getElementById('pop-msg').innerText = msg;
+    const icon = document.getElementById('pop-icon');
+    icon.style.background = color;
+    icon.style.color = "#fff";
+    icon.innerText = iconChar;
+    document.getElementById('statusPopup').style.display = 'flex';
+}
+
+function closePop() {
+    document.getElementById('statusPopup').style.display = 'none';
+    if (document.getElementById('pop-title').innerText === "অসাধারণ!") {
+        closeProfilePage();
+        closeDrawer();
+    }
+}
+function toggleDarkMode() {
+    const isDark = document.getElementById('dark-mode-toggle').checked;
+    if (isDark) { document.body.classList.add('dark-theme'); } 
+    else { document.body.classList.remove('dark-theme'); }
+}
+
+function openFullPage(id) {
+    document.getElementById(id).style.display = 'flex';
+    document.getElementById(id).classList.add('active');
+}
+
+function closeFullPage(id) {
+    document.getElementById(id).style.display = 'none';
+    document.getElementById(id).classList.remove('active');
+}
+function openFullPage(id) {
+    // আগে ড্রয়ার বন্ধ করুন যাতে সেটিংসের পেছনে ড্রয়ার না থাকে
+    closeDrawer(); 
+    
+    const screen = document.getElementById(id);
+    if (screen) {
+        screen.style.display = 'flex';
+        screen.classList.add('active');
+    }
+}
+
+function closeFullPage(id) {
+    const screen = document.getElementById(id);
+    if (screen) {
+        screen.style.display = 'none';
+        screen.classList.remove('active');
+    }
+}
+
+function toggleDarkMode() {
+    const isDark = document.getElementById('dark-mode-toggle').checked;
+    if (isDark) {
+        document.body.classList.add('dark-theme');
+    } else {
+        document.body.classList.remove('dark-theme');
+    }
+}
+function shareApp() {
+    const shareText = "আসসালামু আলাইকুম, এই ইসলামিক অ্যাপটি ব্যবহার করে দেখুন। ডাউনলোড লিঙ্ক: https://play.google.com/store/apps/details?id=your.app.id";
+    const shareUrl = "https://play.google.com/store/apps/details?id=your.app.id";
+
+    if (navigator.share) {
+        navigator.share({
+            title: 'নূর-আল-ইসলাম প্রো',
+            text: shareText,
+            url: shareUrl,
+        }).catch((err) => console.log("Sharing failed", err));
+    } else {
+        // যদি শেয়ার সাপোর্ট না করে তবে লিঙ্ক কপি হবে এবং মেসেজ দেখাবে
+        navigator.clipboard.writeText(shareText).then(() => {
+            alert("আপনার ফোনে সরাসরি শেয়ার সাপোর্ট করছে না। শেয়ার করার লিঙ্কটি কপি করা হয়েছে, এখন যেকোনো জায়গায় পেস্ট করতে পারবেন।");
+        });
+    }
+}
+function openWhatsApp() {
+    // আপনার হোয়াটসঅ্যাপ নম্বর (আন্তর্জাতিক ফরম্যাটে, প্লাস ছাড়া)
+    const phoneNumber = "8801324475851"; 
+    
+    // একটি ডিফল্ট মেসেজ যা ব্যবহারকারী আপনাকে পাঠাবে
+    const message = "আসসালামু আলাইকুম, নূর-আল-ইসলাম প্রো অ্যাপ থেকে যোগাযোগ করছি।";
+    
+    // হোয়াটসঅ্যাপ ওপেন করার লিঙ্ক
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    
+    // নতুন ট্যাবে বা সরাসরি অ্যাপে ওপেন করা
+    window.open(whatsappUrl, '_blank');
+}
 
     </script>
 </body>
