@@ -365,9 +365,33 @@ input:checked + .pro-slider:before { transform: translateX(24px); }
 
 
 </script>
+<script src="https://sdk.start.io/node-sdk.js"></script>
+<script>
+    // অ্যাপ আইডি দিয়ে ইনিশিয়ালাইজ
+    const startApp = new StartApp('203408620');
+    
+    function loadBannerAd() {
+        startApp.addBanner({
+            container: 'ad-container',
+            width: 320,
+            height: 50
+        });
+    }
+    
+    // পেজ লোড হওয়ার সাথে সাথে অ্যাড কল হবে
+    window.addEventListener('load', function() {
+    loadBannerAd();
+});
+
+        // যদি তোমার আগের অন্য কোনো window.onload থাকে, সেগুলোও এর নিচে দিতে পারো
+    };
+</script>
 
 </head>
+
 <body>
+  <div id="ad-container" style="width: 100%; display: flex; justify-content: center; padding: 10px 0; background: var(--white); border-bottom: 1px solid #ddd;"></div>
+
 <div class="top-nav">
     <div class="menu-btn" onclick="openDrawer()">☰</div>
     <div class="user-identity" id="top-user-info" style="display:none">
